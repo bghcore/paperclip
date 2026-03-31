@@ -159,7 +159,7 @@ export function NewProjectDialog() {
       return;
     }
     if (repoUrl && !isGitHubRepoUrl(repoUrl)) {
-      setWorkspaceError("Repo must use a valid GitHub repo URL.");
+      setWorkspaceError("Repo must use a valid GitHub or GitHub Enterprise repo URL.");
       return;
     }
 
@@ -303,7 +303,7 @@ export function NewProjectDialog() {
               className="w-full rounded border border-border bg-transparent px-2 py-1 text-xs outline-none"
               value={workspaceRepoUrl}
               onChange={(e) => { setWorkspaceRepoUrl(e.target.value); setWorkspaceError(null); }}
-              placeholder="https://github.com/org/repo"
+              placeholder="https://github.com/org/repo or https://enterprise.ghe.com/org/repo"
             />
           </div>
 
