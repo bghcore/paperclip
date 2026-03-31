@@ -1026,7 +1026,7 @@ export function IssueDocumentsSection({
                       <div className="rounded-md border border-amber-500/20 bg-background/50 p-3">
                         {renderBody(displayedBody, documentBodyContentClassName)}
                       </div>
-                    ) : (
+                    ) : activeDraft ? (
                       <MarkdownEditor
                         value={displayedBody}
                         onChange={(body) => {
@@ -1052,6 +1052,24 @@ export function IssueDocumentsSection({
                         imageUploadHandler={imageUploadHandler}
                         onSubmit={() => void commitDraft(activeDraft ?? draft, { clearAfterSave: false, trackAutosave: true })}
                       />
+                    ) : (
+                      <div
+                        className="cursor-text"
+                        onClick={() => {
+                          setDraft({
+                            key: doc.key,
+                            title: doc.title ?? "",
+                            body: doc.body,
+                            baseRevisionId: doc.latestRevisionId,
+                            isNew: false,
+                          });
+                        }}
+                      >
+                        {displayedBody.trim()
+                          ? renderBody(displayedBody, documentBodyContentClassName)
+                          : <span className="text-muted-foreground text-sm italic">Markdown body</span>
+                        }
+                      </div>
                     )}
                   </div>
                   <div className="flex min-h-4 items-center justify-end px-1">
