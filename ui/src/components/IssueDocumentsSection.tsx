@@ -1055,7 +1055,8 @@ export function IssueDocumentsSection({
                     ) : (
                       <div
                         className="cursor-text"
-                        onClick={() => {
+                        onClick={(e) => {
+                          if ((e.target as HTMLElement).closest("a")) return;
                           beginEdit(doc.key);
                         }}
                       >
